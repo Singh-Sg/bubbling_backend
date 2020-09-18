@@ -9,7 +9,7 @@ class UsersUserAdmin(UserAdmin):
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', "api_backend_token")}),
+        ('Personal info', {'fields': ('first_name', 'last_name', "api_backend_token", "user_uuid")}),
 
         ('Permissions', {'fields': ('is_staff', 'is_active', 'groups', "user_permissions")}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
@@ -23,5 +23,7 @@ class UsersUserAdmin(UserAdmin):
     )
     search_fields = ('email',)
     ordering = ('email',)
+    readonly_fields = ('user_uuid','email',)
+
 
 admin.site.register(Users, UsersUserAdmin)
