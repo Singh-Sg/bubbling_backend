@@ -8,11 +8,10 @@ Getting Started
 To work on the sample code, you'll need to clone project's repository to your
 local computer. If you haven't, do that first. 
 
-github repo :
+github repo : https://github.com/Singh-Sg/bubbling_backend.git
 
-bitbucket repo :
 
-git clone 
+git clone https://github.com/Singh-Sg/bubbling_backend.git
 
 1. Create a Python virtual environment for your Django project. This virtual
 environment allows you to isolate this project and install any packages you
