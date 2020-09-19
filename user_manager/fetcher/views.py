@@ -122,6 +122,14 @@ class CarViews(APIView):
         :return: car data and status 201 created
         """
         try:
+            if request.data.get("owner")==request.user.user_uuid:
+                return Response(
+                    {
+                        constant["Error"]: constant["AdminOwnerIssue"]
+                    },
+                    status.HTTP_400_BAD_REQUEST,
+                )
+
             resp = requests.post(
             api_backend_base_url + "/car/",
             data=request.data,
