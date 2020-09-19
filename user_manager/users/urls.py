@@ -14,4 +14,9 @@ urlpatterns = [
         views.ObtainAuthToken.as_view(),
         name="auth_token",
     ),
+    path(
+        "profile/",
+        views.get_profile,
+        name="get_profile",
+    ),
 ]

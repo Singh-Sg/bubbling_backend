@@ -71,3 +71,12 @@ class ObtainAuthToken(APIView):
             }
             return Response(content)
         return Response({"Error": "Issue with backend services"})
+
+
+@api_view(["GET"])
+def get_profile(request):
+    """
+    Get login user info
+    """
+    user = UserInfoSerializer(request.user)
+    return Response({"data": user.data}, status=status.HTTP_201_CREATED)
