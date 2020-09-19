@@ -7,8 +7,9 @@ from django.http import Http404, JsonResponse, StreamingHttpResponse
 import json
 from .constants import constant
 from rest_framework.decorators import api_view
+from django.conf import settings
 
-api_backend_base_url = "http://127.0.0.1:8001"
+api_backend_base_url = settings.API_BACKEND_HOST_NAME
 
 
 class ManufacturerViews(APIView):

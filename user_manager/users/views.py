@@ -10,8 +10,10 @@ from rest_framework import authentication, permissions
 from rest_framework.views import APIView
 from rest_framework import parsers, renderers
 from rest_framework.authtoken.models import Token
+from django.conf import settings
 
-api_backend_base_url = "http://127.0.0.1:8001"
+api_backend_base_url = settings.API_BACKEND_HOST_NAME
+
 
 
 @api_view(["POST"])
