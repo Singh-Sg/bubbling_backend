@@ -18,39 +18,42 @@ git clone
 environment allows you to isolate this project and install any packages you
 need without affecting the system Python installation. At the terminal, type
 the following command:
-
-    $ virtualenv -p python3.6 venv
-
+    ```
+      $ virtualenv -p python3.6 venv
+    ```
 2. Activate the virtual environment:
-
-    $ source venv/bin/activate
+    ```
+      $ source venv/bin/activate
+    ```
 
 3. Install Python dependencies for this project:
-
-    $ pip install -r requirements.txt
+    ```
+      $ pip install -r requirements.txt
+    ```
 
 4. For Database schema:
-	$ You need to create 2 database where database name:bubbling_api_backend and user_manager using default user.
-	$ sudo -u postgres psql  (Login into postgres console)
-    $ postgres=# create database bubbling_api_backend;
-    $ create database user_manager;
-
-    $ python manage.py migrate
-    $ python manage.py create_group  (This to apply Permitions to the groups in API_BACKEND Project)
-
+	  ```
+      $ You need to create 2 database where database name:bubbling_api_backend and user_manager using default user.
+	    $ sudo -u postgres psql  (Login into postgres console)
+      $ postgres=# create database bubbling_api_backend;
+      $ create database user_manager;
+      $ python manage.py migrate
+      $ python manage.py create_group  (This to apply Permitions to the groups in API_BACKEND Project)
+   ```
 
 5. Create Super User
-
-    $ python manage.py createsupersuer
-    $ Note: For both project you have to create same email and password:
-    $ Email: deependrasg@gamil.com
-    $ Password: data@321
+    ```
+      $ python manage.py createsupersuer
+      $ Note: For both project you have to create same email and password:
+      $ Email: deependrasg@gamil.com
+      $ Password: data@321
+    ```
 
 6. Start the Django development server:
-
-    $ python manage.py runserver 8001 (For api backend)
-    $ python manage.py runserver 8000 (For User Manager)
-
+  ```
+      $ python manage.py runserver 8001 (For api backend)
+      $ python manage.py runserver 8000 (For User Manager)
+  ```
 7. Open http://127.0.0.1:8000/ and http://127.0.0.1:8002/  in a web browser to view your application.
 
 
@@ -63,12 +66,14 @@ This sample includes:
 * README.md - this file
 * api_backend/ - this directory contains first Django Microservice
 * user_manager/ - this directory contains second Django Microservice
+* Bubblings.postmant_collection: Postman export file you can import in postman here all api infomation presents
+
 
 API Docs:
 ---------
 
 1) http://127.0.0.1:8000/users/token-auth/
-  Info: Login user where you will get TOKEN
+  Info: Login user api where you will get TOKEN
   Method: POST
   Parameter: 
     ```
@@ -82,6 +87,8 @@ API Docs:
 2) http://127.0.0.1:8000/users/create_auth/
   Info: Create User By Using admin
   Method: POST
+  Headers: {"Authorization":"Token 69d32d6aa44063eed31e92eda4a0253cbe365160"}
+  Note: Here Token from admin user, Simple user token will not work
   Parameter: 
     ```
         {
@@ -95,6 +102,8 @@ API Docs:
 3) http://127.0.0.1:8000/manufacturer/
   Info: Create manufacturer
   Method: POST
+  Headers: {"Authorization":"Token 69d32d6aa44063eed31e92eda4a0253cbe365160"}
+  Note: Here Token from admin user, Simple user token will not work
   Parameter: 
     ```
         {
@@ -106,12 +115,16 @@ API Docs:
 
 4) http://127.0.0.1:8000/manufacturer/e4c953f6-0cd9-46a6-9ce8-365ec53b115f/
   Info: GET manufacturer
+  Headers: {"Authorization":"Token 69d32d6aa44063eed31e92eda4a0253cbe365160"}
+  Note: Here Token from admin user, Simple user token will not work
   Method: GET
 
 
 5) http://127.0.0.1:8000/manufacturer/e4c953f6-0cd9-46a6-9ce8-365ec53b115f/
   Info: Update Manufacture
   Method: PATCH
+  Headers: {"Authorization":"Token 69d32d6aa44063eed31e92eda4a0253cbe365160"}
+  Note: Here Token from admin user, Simple user token will not work
   Parameter: 
     ```
         {
@@ -124,12 +137,15 @@ API Docs:
 6) http://127.0.0.1:8000/manufacturer/e4c953f6-0cd9-46a6-9ce8-365ec53b115f/
   Info: Delete manufacturer
   Method: Delete
+  Headers: {"Authorization":"Token 69d32d6aa44063eed31e92eda4a0253cbe365160"}
+  Note: Here Token from admin user, Simple user token will not work
 
 
-
-6) http://127.0.0.1:8000/car/
+7) http://127.0.0.1:8000/car/
   Info: Create CAR
   Method: POST
+  Headers: {"Authorization":"Token 69d32d6aa44063eed31e92eda4a0253cbe365160"}
+  Note: Here Token from admin user, Simple user token will not work
   Parameter: 
     ```
         {
@@ -150,14 +166,113 @@ API Docs:
            or using admin panel
 
 
+8) http://127.0.0.1:8000/car/6a850802-3582-4813-9f56-fb924fd99ae1/
+  Info: GET Car Object by ID
+  Method: GET
+  Headers: {"Authorization":"Token 69d32d6aa44063eed31e92eda4a0253cbe365160"}
+  Note: Here Token from admin user, Simple user token will not work
+
+
+9) http://127.0.0.1:8000/car/6a850802-3582-4813-9f56-fb924fd99ae1/
+  Info: Update CAR Objects
+  Method: PATCH
+  Headers: {"Authorization":"Token 69d32d6aa44063eed31e92eda4a0253cbe365160"}
+  Note: Here Token from admin user, Simple user token will not work
+  Parameter: 
+    ```
+        {
+          "name": "Verena",
+          "color": "Red",
+          "number_of_doors": 4,
+          "price": 42.1,
+          "model_name": "SUV",
+          "owner": "c36986c8-e8d5-4f39-af5e-ffcb738316a4",
+          "manufacturer": "27aa6996-1f24-430c-b554-2c9b17fa4f4e"
+        }
+     ```
+
+
+10) http://127.0.0.1:8000/car/6a850802-3582-4813-9f56-fb924fd99ae1/
+  Info: Delete Car Object by ID
+  Method: Delete
+  Headers: {"Authorization":"Token 69d32d6aa44063eed31e92eda4a0253cbe365160"}
+  Note: Here Token from admin user, Simple user token will not work
+
+
+
+#### This api can use Both(Admin and Simple User) type user.
+
+
+11) http://127.0.0.1:8000/car-list/
+  Info: Showing the all car objects
+  Method: Method
+  Headers: {"Authorization":"Token 69d32d6aa44063eed31e92eda4a0253cbe365160"}
+  Note: Here Token from Admin User or Simple User
+  OutPut:
+  ```
+      {
+        "car_data": [
+            {
+                "id": "6a850802-3582-4813-9f56-fb924fd99ae1",
+                "name": "Tata Pajaro",
+                "color": "White",
+                "number_of_doors": 4,
+                "price": 20.0,
+                "model_name": "TATA Tta",
+                "owner": "c36986c8-e8d5-4f39-af5e-ffcb738316a4",
+                "created_at": "2020-09-19T15:06:08.175625Z",
+                "updated_at": "2020-09-19T15:24:46.132490Z",
+                "manufacturer": "27aa6996-1f24-430c-b554-2c9b17fa4f4e"
+            }
+        ]
+    }
+  ```
+
+
+12) http://127.0.0.1:8000/manufacturer-list/
+  Info: Showing the all manufacturer objects
+  Method: Method
+  Headers: {"Authorization":"Token 69d32d6aa44063eed31e92eda4a0253cbe365160"}
+  Note_1: Here Token from Admin User or  Simple User
+  Note_2: Here you will get Country Name not a int value
+  OutPut:
+  ```
+      {
+          "manufacturer_data": [
+              {
+                  "id": "27aa6996-1f24-430c-b554-2c9b17fa4f4e",
+                  "country": "Japan",
+                  "name": "Update Manufacture",
+                  "description": "Welcome To Tata Manufacture",
+                  "created_at": "2020-09-19T15:03:19.324843Z",
+                  "updated_at": "2020-09-19T15:04:18.091937Z"
+              }
+          ]
+      }
+  ```
+
+
+13) http://127.0.0.1:8000/users/profile/
+  Info: Showing login user info
+  Method: Method
+  Headers: {"Authorization":"Token 69d32d6aa44063eed31e92eda4a0253cbe365160"}
+  Note_1: Here Token from Admin User or  Simple User
+  OutPut:
+  ```
+      {
+          "data": {
+              "email": "admin@gmail.com",
+              "first_name": "",
+              "last_name": "",
+              "user_uuid": "7fa9e14f-05f5-4424-b7c6-7a9a337f9c05"
+          }
+      }  
+  ```
 
 
 
 
 
-
-
-Note: Please import Bubblings.postmant_collection in your postman for all APIs information
 
 
 
