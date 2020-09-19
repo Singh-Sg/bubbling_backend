@@ -30,7 +30,7 @@ the following command:
     $ pip install -r requirements.txt
 
 4. For Database schema:
-
+	$ You need to create 2 database where database name:bubbling_api_backend and user_manager using default user.
     $ python manage.py migrate
     $ python manage.py create_group  (This to apply Permitions to the groups in API_BACKEND Project)
 
