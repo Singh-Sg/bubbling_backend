@@ -3,6 +3,14 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    #  User signup api.
+    path(
+        "users/create_auth/",
+        views.create_auth,
+        name="create_auth",
+    ),
+    path('users/token-auth/', views.ObtainAuthToken.as_view(), name="auth_token",
+    ),
     # This causes a manufacturer objects to be created and returns created manufacturer objects.
     path(
         "manufacturer/",

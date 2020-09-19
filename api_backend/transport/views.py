@@ -3,9 +3,60 @@ from rest_framework.response import Response
 from rest_framework import authentication, permissions
 from django.contrib.auth.models import User
 from .models import Manufacturer, Car
-from .serializer import ManufacturerSerializer, CarSerializer
 from rest_framework import status, generics
 from transport.constants import constant
+
+from django.shortcuts import render
+from .models import Users
+from .serializers import UserSerializer, ManufacturerSerializer, CarSerializer, AuthCustomTokenSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status, generics
+from rest_framework import parsers, renderers
+from rest_framework.authtoken.models import Token
+
+
+@api_view(['POST'])
+def create_auth(request):
+    serialized = UserSerializer(data=request.data)
+    if serialized.is_valid(raise_exception=True):
+        validated_data = serialized.validated_data
+        user = Users.objects.create(
+            email=validated_data['email'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name']
+        )
+
+        user.set_password(validated_data['password'])
+        user.is_staff = True
+        user.save()
+        return Response({"Success":"User created Successfully"}, status=status.HTTP_201_CREATED)
+
+
+class ObtainAuthToken(APIView):
+    authentication_classes = ()
+    throttle_classes = ()
+    permission_classes = ()
+
+    parser_classes = (
+        parsers.FormParser,
+        parsers.MultiPartParser,
+        parsers.JSONParser,
+    )
+
+    renderer_classes = (renderers.JSONRenderer,)
+
+    def post(self, request):
+        serializer = AuthCustomTokenSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+
+        content = {
+            'token': token.key,
+        }
+
+        return Response(content)
 
 
 class ManufacturerViews(APIView):
@@ -242,3 +293,4 @@ class CarListViews(generics.ListAPIView):
         It will return the list Car objects
         """
         return Car.objects.all()
+

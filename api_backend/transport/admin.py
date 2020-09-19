@@ -33,7 +33,13 @@ class UsersUserAdmin(UserAdmin):
     readonly_fields = ('email',)
 
 
+class ManufacturerAdmin(admin.ModelAdmin):    
+      list_per_page = 5
+      list_display = ["id","name", "country", "created_at", "updated_at"]
+
+
+
 admin.site.register(Users, UsersUserAdmin)
-admin.site.register(Manufacturer)
+admin.site.register(Manufacturer, ManufacturerAdmin)
 admin.site.register(Car)
 
