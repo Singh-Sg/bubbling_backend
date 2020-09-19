@@ -8,7 +8,7 @@ from transport.constants import constant
 
 from django.shortcuts import render
 from .models import Users
-from .serializers import UserSerializer, ManufacturerSerializer, CarSerializer, AuthCustomTokenSerializer
+from .serializers import UserSerializer, ManufacturerSerializer, CarSerializer, AuthCustomTokenSerializer, ManufacturerListGetSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -97,7 +97,7 @@ class ManufacturerViews(APIView):
         try:
 
             manufacturer_obj = Manufacturer.objects.get(id=manufacturer_id)
-            serializer = ManufacturerSerializer(
+            serializer = ManufacturerListGetSerializer(
                 manufacturer_obj
             )
             return Response(serializer.data,  status=status.HTTP_200_OK)
@@ -275,7 +275,7 @@ class ManufacturerListViews(generics.ListAPIView):
     GET: List Manufacturer
     """
 
-    serializer_class = ManufacturerSerializer
+    serializer_class = ManufacturerListGetSerializer
 
     def get_queryset(self):
         """

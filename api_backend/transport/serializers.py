@@ -12,11 +12,17 @@ class ManufacturerSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ManufacturerListGetSerializer(ManufacturerSerializer):
+    country = serializers.CharField(source='get_country_display')
+    class Meta:
+        model = Manufacturer
+        fields = "__all__"
+
+
 class CarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Car
         fields = "__all__"
-
 
 
 UserModel = get_user_model()
