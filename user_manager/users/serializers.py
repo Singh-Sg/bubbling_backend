@@ -3,6 +3,8 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.core.validators import validate_email
 from django.contrib.auth import authenticate
+from django.utils.translation import gettext as _
+from django.core import exceptions
 
 UserModel = get_user_model()
 
@@ -16,6 +18,17 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('password', 'email', 'first_name', 'last_name',)
 
 
+class UserInfoSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    email = serializers.CharField()
+    user_uuid = serializers.CharField()
+
+    class Meta:
+        model = UserModel
+        fields = ('email', 'first_name', 'last_name','user_uuid',)
+
+
 class AuthCustomTokenSerializer(serializers.Serializer):
     email = serializers.CharField()
     password = serializers.CharField()
@@ -25,7 +38,6 @@ class AuthCustomTokenSerializer(serializers.Serializer):
         password = attrs.get('password')
 
         if email and password:
-            # Check if user sent email
             if validate_email(email):
                 user_request = get_object_or_404(
                     User,

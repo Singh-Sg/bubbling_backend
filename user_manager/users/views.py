@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Users
-from .serializers import UserSerializer, AuthCustomTokenSerializer
+from .serializers import UserSerializer, AuthCustomTokenSerializer, UserInfoSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -33,7 +33,9 @@ def create_auth(request):
             )
             user.set_password(validated_data['password'])
             user.save()
-            return Response({"Success":"User created Successfully"}, status=status.HTTP_201_CREATED)
+            serial_data = serialized.data
+            info = UserInfoSerializer(user)
+            return Response({"data":info.data}, status=status.HTTP_201_CREATED)
         return Response({'Error':json.loads(resp.content)}, status=status.HTTP_400_BAD_REQUEST)
 
 
