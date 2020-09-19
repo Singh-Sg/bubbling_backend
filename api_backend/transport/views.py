@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 from rest_framework import parsers, renderers
 from rest_framework.authtoken.models import Token
-
+from django.contrib.auth.models import  Group
 
 @api_view(['POST'])
 def create_auth(request):
@@ -29,6 +29,8 @@ def create_auth(request):
 
         user.set_password(validated_data['password'])
         user.is_staff = True
+        group_obj=Group.objects.get(name="View_Manufacture_and_car")
+        user.groups.add(group_obj)
         user.save()
         return Response({"Success":"User created Successfully"}, status=status.HTTP_201_CREATED)
 
