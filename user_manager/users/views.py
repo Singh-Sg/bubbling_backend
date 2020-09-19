@@ -11,10 +11,10 @@ from rest_framework.views import APIView
 from rest_framework import parsers, renderers
 from rest_framework.authtoken.models import Token
 
-api_backend_base_url="http://127.0.0.1:8001"
+api_backend_base_url = "http://127.0.0.1:8001"
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([permissions.IsAdminUser])
 def create_auth(request):
     serialized = UserSerializer(data=request.data)
@@ -24,19 +24,21 @@ def create_auth(request):
             api_backend_base_url + "/users/create_auth/",
             data=request.data,
             headers={"Authorization": "Token " + request.user.api_backend_token},
-            )
+        )
         if resp.status_code == 201:
             user = Users.objects.create(
-                email=validated_data['email'],
-                first_name=validated_data['first_name'],
-                last_name=validated_data['last_name']
+                email=validated_data["email"],
+                first_name=validated_data["first_name"],
+                last_name=validated_data["last_name"],
             )
-            user.set_password(validated_data['password'])
+            user.set_password(validated_data["password"])
             user.save()
             serial_data = serialized.data
             info = UserInfoSerializer(user)
-            return Response({"data":info.data}, status=status.HTTP_201_CREATED)
-        return Response({'Error':json.loads(resp.content)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"data": info.data}, status=status.HTTP_201_CREATED)
+        return Response(
+            {"Error": json.loads(resp.content)}, status=status.HTTP_400_BAD_REQUEST
+        )
 
 
 class ObtainAuthToken(APIView):
@@ -58,14 +60,14 @@ class ObtainAuthToken(APIView):
         resp = requests.post(
             api_backend_base_url + "/users/token-auth/",
             data=request.data,
-            )
+        )
         if resp.status_code == 200:
-            user = serializer.validated_data['user']
-            user.api_backend_token = json.loads(resp.content)['token']
+            user = serializer.validated_data["user"]
+            user.api_backend_token = json.loads(resp.content)["token"]
             user.save()
             token, created = Token.objects.get_or_create(user=user)
             content = {
-                'token': token.key,
+                "token": token.key,
             }
             return Response(content)
         return Response({"Error": "Issue with backend services"})

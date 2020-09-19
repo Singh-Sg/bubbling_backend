@@ -36,5 +36,5 @@ urlpatterns = [
         "car-list/",
         views.get_all_car_list,
         name="car_list",
-    )
+    ),
 ]

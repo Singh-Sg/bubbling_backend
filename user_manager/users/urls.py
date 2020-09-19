@@ -9,6 +9,9 @@ urlpatterns = [
         views.create_auth,
         name="create_auth",
     ),
-    path('token-auth/', views.ObtainAuthToken.as_view(), name="auth_token",
+    path(
+        "token-auth/",
+        views.ObtainAuthToken.as_view(),
+        name="auth_token",
     ),
 ]

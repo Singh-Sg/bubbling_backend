@@ -8,6 +8,7 @@ from django.core import exceptions
 
 UserModel = get_user_model()
 
+
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     first_name = serializers.CharField()
@@ -15,7 +16,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ('password', 'email', 'first_name', 'last_name',)
+        fields = (
+            "password",
+            "email",
+            "first_name",
+            "last_name",
+        )
 
 
 class UserInfoSerializer(serializers.ModelSerializer):
@@ -26,7 +32,12 @@ class UserInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ('email', 'first_name', 'last_name','user_uuid',)
+        fields = (
+            "email",
+            "first_name",
+            "last_name",
+            "user_uuid",
+        )
 
 
 class AuthCustomTokenSerializer(serializers.Serializer):
@@ -34,8 +45,8 @@ class AuthCustomTokenSerializer(serializers.Serializer):
     password = serializers.CharField()
 
     def validate(self, attrs):
-        email = attrs.get('email')
-        password = attrs.get('password')
+        email = attrs.get("email")
+        password = attrs.get("password")
 
         if email and password:
             if validate_email(email):
@@ -50,14 +61,14 @@ class AuthCustomTokenSerializer(serializers.Serializer):
 
             if user:
                 if not user.is_active:
-                    msg = _('User account is disabled.')
+                    msg = _("User account is disabled.")
                     raise exceptions.ValidationError(msg)
             else:
-                msg = _('Unable to log in with provided credentials.')
+                msg = _("Unable to log in with provided credentials.")
                 raise exceptions.ValidationError(msg)
         else:
             msg = _('Must include "email" and "password"')
             raise exceptions.ValidationError(msg)
 
-        attrs['user'] = user
+        attrs["user"] = user
         return attrs

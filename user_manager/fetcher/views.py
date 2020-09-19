@@ -8,13 +8,14 @@ import json
 from .constants import constant
 from rest_framework.decorators import api_view
 
-api_backend_base_url="http://127.0.0.1:8001"
+api_backend_base_url = "http://127.0.0.1:8001"
 
 
 class ManufacturerViews(APIView):
     """
     ManufacturerViews is used to create, update, fetch and delete objects
     """
+
     permission_classes = [permissions.IsAdminUser]
 
     @classmethod
@@ -26,16 +27,14 @@ class ManufacturerViews(APIView):
         """
         try:
             resp = requests.post(
-            api_backend_base_url + "/manufacturer/",
-            data=request.data,
-            headers={"Authorization": "Token " + request.user.api_backend_token},
+                api_backend_base_url + "/manufacturer/",
+                data=request.data,
+                headers={"Authorization": "Token " + request.user.api_backend_token},
             )
             return JsonResponse(json.loads(resp.content), status=resp.status_code)
         except Exception as e:
             return Response(
-                {
-                    constant["Error"]: constant["ApiBackendError"]
-                },
+                {constant["Error"]: constant["ApiBackendError"]},
                 status.HTTP_404_NOT_FOUND,
             )
 
@@ -49,15 +48,13 @@ class ManufacturerViews(APIView):
         """
         try:
             resp = requests.get(
-            api_backend_base_url + "/manufacturer/"+manufacturer_id+"/",
-            headers={"Authorization": "Token " + request.user.api_backend_token},
+                api_backend_base_url + "/manufacturer/" + manufacturer_id + "/",
+                headers={"Authorization": "Token " + request.user.api_backend_token},
             )
             return JsonResponse(json.loads(resp.content), status=resp.status_code)
         except Exception as e:
             return Response(
-                {
-                    constant["Error"]: constant["ApiBackendError"]
-                },
+                {constant["Error"]: constant["ApiBackendError"]},
                 status.HTTP_404_NOT_FOUND,
             )
 
@@ -71,19 +68,16 @@ class ManufacturerViews(APIView):
         """
         try:
             resp = requests.patch(
-            api_backend_base_url + "/manufacturer/"+manufacturer_id+"/",
-            data=request.data,
-            headers={"Authorization": "Token " + request.user.api_backend_token},
+                api_backend_base_url + "/manufacturer/" + manufacturer_id + "/",
+                data=request.data,
+                headers={"Authorization": "Token " + request.user.api_backend_token},
             )
             return JsonResponse(json.loads(resp.content), status=resp.status_code)
         except Exception as e:
             return Response(
-                {
-                    constant["Error"]: constant["ApiBackendError"]
-                },
+                {constant["Error"]: constant["ApiBackendError"]},
                 status.HTTP_404_NOT_FOUND,
             )
-
 
     @classmethod
     def delete(cls, request, manufacturer_id):
@@ -95,15 +89,13 @@ class ManufacturerViews(APIView):
         """
         try:
             resp = requests.delete(
-            api_backend_base_url + "/manufacturer/"+manufacturer_id+"/",
-            headers={"Authorization": "Token " + request.user.api_backend_token},
+                api_backend_base_url + "/manufacturer/" + manufacturer_id + "/",
+                headers={"Authorization": "Token " + request.user.api_backend_token},
             )
             return JsonResponse(json.loads(resp.content), status=resp.status_code)
         except Exception as e:
             return Response(
-                {
-                    constant["Error"]: constant["ApiBackendError"]
-                },
+                {constant["Error"]: constant["ApiBackendError"]},
                 status.HTTP_404_NOT_FOUND,
             )
 
@@ -112,6 +104,7 @@ class CarViews(APIView):
     """
     CarViews is used to create, update, fetch and delete objects
     """
+
     permission_classes = [permissions.IsAdminUser]
 
     @classmethod
@@ -122,28 +115,23 @@ class CarViews(APIView):
         :return: car data and status 201 created
         """
         try:
-            if request.data.get("owner")==request.user.user_uuid:
+            if request.data.get("owner") == request.user.user_uuid:
                 return Response(
-                    {
-                        constant["Error"]: constant["AdminOwnerIssue"]
-                    },
+                    {constant["Error"]: constant["AdminOwnerIssue"]},
                     status.HTTP_400_BAD_REQUEST,
                 )
 
             resp = requests.post(
-            api_backend_base_url + "/car/",
-            data=request.data,
-            headers={"Authorization": "Token " + request.user.api_backend_token},
+                api_backend_base_url + "/car/",
+                data=request.data,
+                headers={"Authorization": "Token " + request.user.api_backend_token},
             )
             return JsonResponse(json.loads(resp.content), status=resp.status_code)
         except Exception as e:
             return Response(
-                {
-                    constant["Error"]: constant["ApiBackendError"]
-                },
+                {constant["Error"]: constant["ApiBackendError"]},
                 status.HTTP_404_NOT_FOUND,
             )
-
 
     @classmethod
     def get(cls, request, car_id):
@@ -155,15 +143,13 @@ class CarViews(APIView):
         """
         try:
             resp = requests.get(
-            api_backend_base_url + "/car/"+car_id+"/",
-            headers={"Authorization": "Token " + request.user.api_backend_token},
+                api_backend_base_url + "/car/" + car_id + "/",
+                headers={"Authorization": "Token " + request.user.api_backend_token},
             )
             return JsonResponse(json.loads(resp.content), status=resp.status_code)
         except Exception as e:
             return Response(
-                {
-                    constant["Error"]: constant["ApiBackendError"]
-                },
+                {constant["Error"]: constant["ApiBackendError"]},
                 status.HTTP_404_NOT_FOUND,
             )
 
@@ -177,19 +163,16 @@ class CarViews(APIView):
         """
         try:
             resp = requests.patch(
-            api_backend_base_url + "/car/"+car_id+"/",
-            data=request.data,
-            headers={"Authorization": "Token " + request.user.api_backend_token},
+                api_backend_base_url + "/car/" + car_id + "/",
+                data=request.data,
+                headers={"Authorization": "Token " + request.user.api_backend_token},
             )
             return JsonResponse(json.loads(resp.content), status=resp.status_code)
         except Exception as e:
             return Response(
-                {
-                    constant["Error"]: constant["ApiBackendError"]
-                },
+                {constant["Error"]: constant["ApiBackendError"]},
                 status.HTTP_404_NOT_FOUND,
             )
-
 
     @classmethod
     def delete(cls, request, car_id):
@@ -200,15 +183,13 @@ class CarViews(APIView):
         """
         try:
             resp = requests.delete(
-            api_backend_base_url + "/car/"+car_id+"/",
-            headers={"Authorization": "Token " + request.user.api_backend_token},
+                api_backend_base_url + "/car/" + car_id + "/",
+                headers={"Authorization": "Token " + request.user.api_backend_token},
             )
             return JsonResponse(json.loads(resp.content), status=resp.status_code)
         except Exception as e:
             return Response(
-                {
-                    constant["Error"]: constant["ApiBackendError"]
-                },
+                {constant["Error"]: constant["ApiBackendError"]},
                 status.HTTP_404_NOT_FOUND,
             )
 
@@ -219,10 +200,12 @@ def get_all_manufacturer_list(request):
     Get manufacturer data
     """
     resp = requests.get(
-            api_backend_base_url + "/manufacturer-list/",
-            headers={"Authorization": "Token " + request.user.api_backend_token},
-            )
-    return JsonResponse({"manufacturer_data": json.loads(resp.content)}, status=resp.status_code)
+        api_backend_base_url + "/manufacturer-list/",
+        headers={"Authorization": "Token " + request.user.api_backend_token},
+    )
+    return JsonResponse(
+        {"manufacturer_data": json.loads(resp.content)}, status=resp.status_code
+    )
 
 
 @api_view(["GET"])
@@ -231,7 +214,7 @@ def get_all_car_list(request):
     Get car data
     """
     resp = requests.get(
-            api_backend_base_url + "/car-list/",
-            headers={"Authorization": "Token " + request.user.api_backend_token},
-            )
-    return JsonResponse({"car_data":json.loads(resp.content)}, status=resp.status_code)
+        api_backend_base_url + "/car-list/",
+        headers={"Authorization": "Token " + request.user.api_backend_token},
+    )
+    return JsonResponse({"car_data": json.loads(resp.content)}, status=resp.status_code)
