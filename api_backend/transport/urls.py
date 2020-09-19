@@ -9,7 +9,11 @@ urlpatterns = [
         views.create_auth,
         name="create_auth",
     ),
-    path('users/token-auth/', views.ObtainAuthToken.as_view(), name="auth_token",
+    #  User login api.
+    path(
+        "users/token-auth/",
+        views.ObtainAuthToken.as_view(),
+        name="auth_token",
     ),
     # This causes a manufacturer objects to be created and returns created manufacturer objects.
     path(
@@ -35,11 +39,13 @@ urlpatterns = [
         views.CarViews.as_view(),
         name="car",
     ),
+    # This returns list of manufacturer objects
     path(
         "manufacturer-list/",
         views.ManufacturerListViews.as_view(),
         name="manufacturer_list",
     ),
+    # This returns list of car objects
     path(
         "car-list/",
         views.CarListViews.as_view(),

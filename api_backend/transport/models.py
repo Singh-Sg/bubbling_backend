@@ -8,20 +8,23 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 import uuid
 
+
 def uuid_str():
     return str(uuid.uuid4())
+
 
 class CustomUserManager(BaseUserManager):
     """
     Custom user model manager where email is the unique identifiers
     for authentication instead of usernames.
     """
+
     def create_user(self, email, password, **extra_fields):
         """
         Create and save a User with the given email and password.
         """
         if not email:
-            raise ValueError(_('The Email must be set'))
+            raise ValueError(_("The Email must be set"))
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -32,22 +35,21 @@ class CustomUserManager(BaseUserManager):
         """
         Create and save a SuperUser with the given email and password.
         """
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('is_active', True)
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("is_active", True)
 
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError(_('Superuser must have is_staff=True.'))
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError(_('Superuser must have is_superuser=True.'))
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError(_("Superuser must have is_staff=True."))
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError(_("Superuser must have is_superuser=True."))
         return self.create_user(email, password, **extra_fields)
-
 
 
 class Users(AbstractUser):
     username = None
-    email = models.EmailField(_('email address'), unique=True)
-    USERNAME_FIELD = 'email'
+    email = models.EmailField(_("email address"), unique=True)
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
@@ -56,10 +58,9 @@ class Users(AbstractUser):
         return self.email
 
 
-
-
 def uuid_str():
     return str(uuid.uuid4())
+
 
 UNITED_STATES = 1
 RUSSIA = 2
@@ -73,16 +74,16 @@ INDIA = 9
 CANADA = 10
 
 COUNTRY_CHOICES = (
-    (UNITED_STATES, 'United States'),
-    (RUSSIA, 'Russia'),
-    (CHINA, 'China'),
-    (GERMANY, 'Germany'),
-    (UNITED_KINGDOM, 'United Kingdom'),
-    (FRANCE, 'France'),
-    (JAPAN, 'Japan'),
-    (ISRAEL, 'Israel'),
-    (INDIA, 'India'),
-    (CANADA, 'Canada')
+    (UNITED_STATES, "United States"),
+    (RUSSIA, "Russia"),
+    (CHINA, "China"),
+    (GERMANY, "Germany"),
+    (UNITED_KINGDOM, "United Kingdom"),
+    (FRANCE, "France"),
+    (JAPAN, "Japan"),
+    (ISRAEL, "Israel"),
+    (INDIA, "India"),
+    (CANADA, "Canada"),
 )
 
 
@@ -96,7 +97,7 @@ class Manufacturer(models.Model):
     country = models.IntegerField(choices=COUNTRY_CHOICES, default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+
     def __str__(self):
         return str(self.name)
 
@@ -115,6 +116,6 @@ class Car(models.Model):
     owner = models.CharField(max_length=40, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return self.name
-
