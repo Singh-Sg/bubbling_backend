@@ -1,0 +1,710 @@
+{
+	"info": {
+		"_postman_id": "a55d7f6c-0de0-4b33-94fc-94189f054d47",
+		"name": "Bubblings",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth-Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"student@123\",\n    \"email\": \"admin@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/token-auth/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"token-auth",
+						""
+					]
+				},
+				"description": "Login api where you will get Rest Token"
+			},
+			"response": []
+		},
+		{
+			"name": "Create user by admin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 122eadfcfa56147b54f2f74825c2dc0c7e6f54f8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"student@123\",\n    \"email\": \"deependrasg@gmail.com\",\n    \"first_name\": \"Singh\",\n    \"last_name\": \"deependra\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/create_auth/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"create_auth",
+						""
+					]
+				},
+				"description": "Here you need to pass admin token"
+			},
+			"response": []
+		},
+		{
+			"name": "Create manufacturer By admin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 122eadfcfa56147b54f2f74825c2dc0c7e6f54f8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Deependra",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "description",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "7",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/manufacturer/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"manufacturer",
+						""
+					]
+				},
+				"description": "Need to pass Admin Token"
+			},
+			"response": []
+		},
+		{
+			"name": "Get manufacture by admin",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 122eadfcfa56147b54f2f74825c2dc0c7e6f54f8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "name",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "description",
+							"value": "description",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "country",
+							"value": "7",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/manufacturer/e4c953f6-0cd9-46a6-9ce8-365ec53b115f/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"manufacturer",
+						"e4c953f6-0cd9-46a6-9ce8-365ec53b115f",
+						""
+					]
+				},
+				"description": "Here you need to pass authorization token"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Manufacture By ID",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 122eadfcfa56147b54f2f74825c2dc0c7e6f54f8",
+						"type": "text"
+					},
+					{
+						"key": "pipe_line_token",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Update Manufacture ",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Welcome To Tata Manufacture",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "7",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/manufacturer/e4c953f6-0cd9-46a6-9ce8-365ec53b115f/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"manufacturer",
+						"e4c953f6-0cd9-46a6-9ce8-365ec53b115f",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Manufacture",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 122eadfcfa56147b54f2f74825c2dc0c7e6f54f8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"deependra\",\n    \"password\": \"student@123\",\n    \"email\": \"deependrasg@gamail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/manufacturer/5e565a5d-e477-407d-ae0a-69aebf5d516e/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"manufacturer",
+						"5e565a5d-e477-407d-ae0a-69aebf5d516e",
+						""
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "e369d94d-0290-4601-a854-a696079f53f5",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create CAR by admin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 122eadfcfa56147b54f2f74825c2dc0c7e6f54f8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Verena",
+							"type": "text"
+						},
+						{
+							"key": "color",
+							"value": "Red",
+							"type": "text"
+						},
+						{
+							"key": "number_of_doors",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "42.1",
+							"type": "text"
+						},
+						{
+							"key": "model_name",
+							"value": "SUV",
+							"type": "text"
+						},
+						{
+							"key": "manufacturer",
+							"value": "e4c953f6-0cd9-46a6-9ce8-365ec53b115f",
+							"type": "text"
+						},
+						{
+							"key": "owner",
+							"value": "aca338fb-6b50-4612-a0f5-be4624b45ce8",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/car/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"car",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get car object by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 122eadfcfa56147b54f2f74825c2dc0c7e6f54f8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/car/de458e66-50e8-440f-b018-d3b6842b799e/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"car",
+						"de458e66-50e8-440f-b018-d3b6842b799e",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update car by admin",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 122eadfcfa56147b54f2f74825c2dc0c7e6f54f8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Tata Pajaro",
+							"type": "text"
+						},
+						{
+							"key": "color",
+							"value": "White",
+							"type": "text"
+						},
+						{
+							"key": "number_of_doors",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "20",
+							"type": "text"
+						},
+						{
+							"key": "model_name",
+							"value": "TATA Tta",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/car/de458e66-50e8-440f-b018-d3b6842b799e/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"car",
+						"de458e66-50e8-440f-b018-d3b6842b799e",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete CAR objects by admin",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 122eadfcfa56147b54f2f74825c2dc0c7e6f54f8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Tata Pajaro",
+							"type": "text"
+						},
+						{
+							"key": "color",
+							"value": "White",
+							"type": "text"
+						},
+						{
+							"key": "number_of_doors",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "20",
+							"type": "text"
+						},
+						{
+							"key": "model_name",
+							"value": "TATA",
+							"type": "text"
+						},
+						{
+							"key": "manufacturer",
+							"value": "6f2c6ebd-84a1-4bf4-8307-a2b11c8beb3d",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/car/9a811c6b-6b09-4a1c-9b4a-44afeba31c04/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"car",
+						"9a811c6b-6b09-4a1c-9b4a-44afeba31c04",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth-Token For Simple User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"student@123\",\n    \"email\": \"deependrasg@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/token-auth/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"token-auth",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "car-list by simple user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token be5df6223983999f73543c2c1e2dc298a0c5afa4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "name",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "description",
+							"value": "deependra singh",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "country",
+							"value": "7",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/car-list/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"car-list",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "manufacturer-list by simple user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token be5df6223983999f73543c2c1e2dc298a0c5afa4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "name",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "description",
+							"value": "deependra singh",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "country",
+							"value": "7",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/manufacturer-list/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"manufacturer-list",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Login User Profile Info",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 835a5a81b591fb1024a96588e16ad896e1ecf460",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"student@123\",\n    \"email\": \"deependrasg3@gmail.com\",\n    \"first_name\": \"Singh\",\n    \"last_name\": \"deependra\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/profile/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"profile",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
